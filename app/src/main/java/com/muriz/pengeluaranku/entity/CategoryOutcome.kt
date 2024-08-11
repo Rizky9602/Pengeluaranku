@@ -1,5 +1,15 @@
 package com.muriz.pengeluaranku.entity
 
-enum class CategoryOutcome {
-    MAKANAN, MINUMAN, CEMILAN, HIBURAN, KELUARGA, TABUNGAN, PAKAIAN, BELANJA_KEBUTUHAN, TRANSPORTASI
+import com.muriz.pengeluaranku.R
+
+enum class CategoryOutcome(val icon: Int) {
+    MAKANAN(R.drawable.food),
+    MINUMAN(R.drawable.drink),
+    CEMILAN(R.drawable.snack),
+    HIBURAN(R.drawable.ticket),
+    KELUARGA(R.drawable.family),
+    TABUNGAN(R.drawable.savings),
+    PAKAIAN(R.drawable.clothes),
+    BELANJA_KEBUTUHAN(R.drawable.shopping),
+    TRANSPORTASI(R.drawable.transport)
 }

@@ -51,23 +51,49 @@ fun HomeScreenComponent(
     saldo: Int,
     income: Int,
     outcome: Int,
-    content : List<Outcome>,
+    dataOutcome: List<Outcome>,
     modifier: Modifier = Modifier
 ) {
     Scaffold(modifier = modifier) { paddingValues ->
         Box(
             modifier = modifier
-                .background(color = colorResource(id = R.color.deepBlue))
+                .background(color = colorResource(id = R.color.lightBlue))
                 .fillMaxHeight()
                 .padding(paddingValues)
-                .padding(top = 20.dp)
         ) {
-            LazyColumn {
+            LazyColumn(verticalArrangement = Arrangement.spacedBy(0.dp)) {
                 item {
-                    Profile(name = name, desc = desc, image = image)
+                    Spacer(
+                        modifier = modifier
+                            .background(color = colorResource(id = R.color.deepBlue))
+                            .fillMaxWidth()
+                            .height(20.dp)
+                    )
                 }
+
                 item {
-                    Box(modifier = Modifier.padding(top = 10.dp)) {
+                    Box(
+                        modifier = modifier
+                            .background(color = colorResource(id = R.color.deepBlue))
+                            .fillMaxWidth()
+                            .fillMaxHeight()
+                            .padding(start = 10.dp, end = 10.dp)
+                    ) {
+                        Profile(name = name, desc = desc, image = image)
+                    }
+                }
+
+                item {
+                    Spacer(
+                        modifier = modifier
+                            .background(color = colorResource(id = R.color.deepBlue))
+                            .fillMaxWidth()
+                            .height(10.dp)
+                    )
+                }
+
+                item {
+                    Box {
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -75,39 +101,43 @@ fun HomeScreenComponent(
                                 .clip(RectangleShape)
                                 .background(
                                     colorResource(
-                                        id = R.color.lightBlue
+                                        id = R.color.deepBlue
                                     )
                                 )
-                                .align(Alignment.BottomCenter)
+                                .align(Alignment.TopCenter)
                         )
                         WalletCard(saldo = saldo, income = income, outcome = outcome)
                     }
                 }
+
                 item {
                     Spacer(
                         modifier = modifier
-                            .background(colorResource(id = R.color.lightBlue))
                             .fillMaxWidth()
                             .height(10.dp)
                     )
                 }
+
                 item {
-                    Box(
-                        modifier = modifier
-                            .background(color = colorResource(id = R.color.lightBlue))
-                            .fillMaxWidth()
-                            .fillMaxHeight()
-                    ) {
-                        Text(
-                            text = "Riwayat Transaksi",
-                            fontFamily = poppinsFontFamily,
-                            color = Color.White,
-                            fontSize = 16.sp,
-                            modifier = modifier.padding(start = 20.dp)
+                    Text(
+                        text = "Riwayat Transaksi",
+                        fontFamily = poppinsFontFamily,
+                        color = Color.White,
+                        fontSize = 16.sp,
+                        modifier = modifier.padding(start = 20.dp)
+                    )
+                }
+
+                items(dataOutcome) { dataOutcome ->
+                    Box(modifier = modifier.padding(10.dp)){
+                        OutcomeHistory(
+                            icon = dataOutcome.category.icon,
+                            name = dataOutcome.name,
+                            date = dataOutcome.date,
+                            quantity = dataOutcome.quantity
                         )
                     }
                 }
-
             }
         }
     }
@@ -134,6 +164,6 @@ private fun Test() {
         saldo = 13500000,
         income = 1000000,
         outcome = 500000,
-        content = data
+        dataOutcome = data
     )
 }
