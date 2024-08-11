@@ -84,7 +84,4 @@ dependencies {
 
     //chart
     implementation ("io.github.ehsannarmani:compose-charts:0.0.13")
-
-    //shape
-    implementation (libs.androidx.graphics.shapes)
 }

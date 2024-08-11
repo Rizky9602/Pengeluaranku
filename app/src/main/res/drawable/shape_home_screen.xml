@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item>
-        <color android:color="@color/lightBlue"/>
-        <shape android:shape="rectangle"/>
-        <scale android:scaleWidth="@android:string/autofill"/>
-    </item>
-</selector>
