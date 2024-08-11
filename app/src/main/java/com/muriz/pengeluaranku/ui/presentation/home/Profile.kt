@@ -22,11 +22,10 @@ import androidx.compose.ui.unit.sp
 import com.muriz.pengeluaranku.ui.theme.poppinsFontFamily
 
 @Composable
-fun ProfileHome(name: String, desc: String, image: Int, modifier: Modifier = Modifier) {
+fun Profile(name: String, desc: String, image: Int, modifier: Modifier = Modifier) {
     Row(
         Modifier
-            .fillMaxWidth()
-            .padding(10.dp),
+            .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {

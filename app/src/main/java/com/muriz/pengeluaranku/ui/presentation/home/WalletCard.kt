@@ -87,7 +87,7 @@ fun WalletCard(
                     )
                 }
             }
-            Spacer(modifier = Modifier.size(25.dp))
+            Spacer(modifier = Modifier.size(40.dp))
             Box(modifier = modifier) {
                 PieChart(
                     modifier = modifier.size(100.dp),
