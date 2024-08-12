@@ -14,4 +14,15 @@
     <color name="darkWhiteBlue">#FF103783</color>
     <color name="green">#00BF13</color>
     <color name="red">#ED1717</color>
+
+    //pie color
+    <color name="makanan">#b30000</color>
+    <color name="minuman">#7c1158</color>
+    <color name="cemilan">#4421af</color>
+    <color name="hiburan">#1a53ff</color>
+    <color name="keluarga">#0d88e6</color>
+    <color name="tabungan">#00b7c7</color>
+    <color name="pakaian">#5ad45a</color>
+    <color name="belanja">#8be04e</color>
+    <color name="transport">#ebdc78</color>
 </resources>

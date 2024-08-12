@@ -39,8 +39,24 @@ import com.muriz.pengeluaranku.ui.theme.poppinsFontFamily
 import java.time.LocalDate
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier) {
-
+fun HomeScreen(
+    name: String,
+    desc: String,
+    image: Int,
+    saldo: Int,
+    income: Int,
+    outcome: Int,
+    dataOutcome: List<Outcome>
+) {
+    HomeScreenComponent(
+        name =name,
+        desc =desc,
+        image =image,
+        saldo =saldo,
+        income =income,
+        outcome =outcome,
+        dataOutcome =dataOutcome
+    )
 }
 
 @Composable
@@ -129,7 +145,7 @@ fun HomeScreenComponent(
                 }
 
                 items(dataOutcome) { dataOutcome ->
-                    Box(modifier = modifier.padding(10.dp)){
+                    Box(modifier = modifier.padding(10.dp)) {
                         OutcomeHistory(
                             icon = dataOutcome.category.icon,
                             name = dataOutcome.name,
@@ -148,6 +164,55 @@ fun HomeScreenComponent(
 @Composable
 private fun Test() {
     val data = listOf(
+        Outcome(
+            name = "nasi padang",
+            quantity = 10008000,
+            date = LocalDate.now(),
+            category = CategoryOutcome.MAKANAN,
+            id = 1
+        ),
+        Outcome(
+            name = "nasi padang",
+            quantity = 18000,
+            date = LocalDate.now(),
+            category = CategoryOutcome.CEMILAN,
+            id = 1
+        ),
+        Outcome(
+            name = "nasi padang",
+            quantity = 18000,
+            date = LocalDate.now(),
+            category = CategoryOutcome.MAKANAN,
+            id = 1
+        ),
+        Outcome(
+            name = "nasi padang",
+            quantity = 18000,
+            date = LocalDate.now(),
+            category = CategoryOutcome.MAKANAN,
+            id = 1
+        ),
+        Outcome(
+            name = "nasi padang",
+            quantity = 18000,
+            date = LocalDate.now(),
+            category = CategoryOutcome.MAKANAN,
+            id = 1
+        ),
+        Outcome(
+            name = "nasi padang",
+            quantity = 18000,
+            date = LocalDate.now(),
+            category = CategoryOutcome.MAKANAN,
+            id = 1
+        ),
+        Outcome(
+            name = "nasi padang",
+            quantity = 18000,
+            date = LocalDate.now(),
+            category = CategoryOutcome.MAKANAN,
+            id = 1
+        ),
         Outcome(
             name = "nasi padang",
             quantity = 18000,

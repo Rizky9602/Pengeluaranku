@@ -36,15 +36,7 @@ fun WalletCard(
     modifier: Modifier = Modifier
 ) {
     val decimalFormat = DecimalFormat("#,###")
-    val statistic : Float
-    val colorStatistic : Color
-    if (income>=outcome){
-        statistic = ((income - outcome) / income.toFloat()) * 100
-        colorStatistic = colorResource(id = R.color.green)
-    }else {
-        statistic = ((outcome - income) / income.toFloat()) * 100
-        colorStatistic = colorResource(id = R.color.red)
-    }
+    val statistic: Float = ((income - outcome) / income.toFloat()) * 100
 
     Box(
         contentAlignment = Alignment.Center,
@@ -94,12 +86,12 @@ fun WalletCard(
                     data = listOf(
                         Pie(
                             label = "income",
-                            data = income.toDouble()  - outcome,
+                            data = income.toDouble() - outcome,
                             color = colorResource(id = R.color.green)
                         ),
                         Pie(
                             label = "outcome",
-                            data = outcome.toDouble() ,
+                            data = outcome.toDouble(),
                             color = colorResource(id = R.color.red)
                         )
                     ),
@@ -111,7 +103,7 @@ fun WalletCard(
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
                     fontFamily = poppinsFontFamily,
-                    color = colorStatistic,
+                    color = colorResource(id = R.color.green),
                     modifier = modifier.align(Alignment.Center)
                 )
             }
@@ -123,5 +115,5 @@ fun WalletCard(
 @Preview(showBackground = true)
 @Composable
 private fun Test() {
-    WalletCard(saldo = 5100000,  income = 1000, outcome = 1200)
+    WalletCard(saldo = 5100000, income = 1000, outcome = 1200)
 }
