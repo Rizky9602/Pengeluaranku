@@ -1,42 +1,58 @@
 package com.muriz.pengeluaranku.ui.presentation.home
 
-import androidx.compose.foundation.Image
+
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.core.EaseIn
+import androidx.compose.animation.core.EaseOut
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.AlertDialogDefaults.shape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.drawWithCache
-import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.muriz.pengeluaranku.R
 import com.muriz.pengeluaranku.entity.CategoryOutcome
 import com.muriz.pengeluaranku.entity.Outcome
+import com.muriz.pengeluaranku.ui.presentation.home.additional.Additional
 import com.muriz.pengeluaranku.ui.theme.poppinsFontFamily
 import java.time.LocalDate
+
 
 @Composable
 fun HomeScreen(
@@ -48,15 +64,42 @@ fun HomeScreen(
     outcome: Int,
     dataOutcome: List<Outcome>
 ) {
-    HomeScreenComponent(
-        name =name,
-        desc =desc,
-        image =image,
-        saldo =saldo,
-        income =income,
-        outcome =outcome,
-        dataOutcome =dataOutcome
-    )
+    val navController = rememberNavController()
+    NavHost(
+        navController = navController,
+        startDestination = "home",
+        enterTransition = { EnterTransition.None },
+        exitTransition = { ExitTransition.None }) {
+        composable(route = "home")
+        {
+            HomeScreenComponent(
+                name = name,
+                desc = desc,
+                image = image,
+                saldo = saldo,
+                income = income,
+                outcome = outcome,
+                dataOutcome = dataOutcome,
+                navController = navController
+            )
+
+        }
+        composable(route = "Additional",
+            enterTransition = {
+                slideIntoContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Up,
+                    tween(300, easing = EaseIn)
+                )
+            },
+            exitTransition = {
+                slideOutOfContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Down,
+                    tween(1000, easing = EaseOut)
+                )
+            }) {
+            Additional(navHostController = navController)
+        }
+    }
 }
 
 @Composable
@@ -68,9 +111,21 @@ fun HomeScreenComponent(
     income: Int,
     outcome: Int,
     dataOutcome: List<Outcome>,
-    modifier: Modifier = Modifier
+    navController: NavHostController,
+    modifier: Modifier = Modifier,
 ) {
-    Scaffold(modifier = modifier) { paddingValues ->
+    Scaffold(floatingActionButton = {
+        FloatingActionButton(
+            onClick = { navController.navigate("Additional") }, containerColor = Color.White,
+            modifier = modifier.offset((-15).dp, (-40).dp)
+        ) {
+            Icon(
+                imageVector = Icons.Filled.Add,
+                contentDescription = "add icon",
+                modifier.size(30.dp)
+            )
+        }
+    }) { paddingValues ->
         Box(
             modifier = modifier
                 .background(color = colorResource(id = R.color.lightBlue))
@@ -222,7 +277,7 @@ private fun Test() {
         )
     )
 
-    HomeScreenComponent(
+    HomeScreen(
         name = "Muhammad Rizky",
         desc = "Tetap hemat tahun depan akad nikah",
         image = R.drawable.pp,

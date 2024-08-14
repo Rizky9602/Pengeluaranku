@@ -28,6 +28,8 @@ import androidx.compose.ui.unit.dp
 import com.muriz.pengeluaranku.R
 import com.muriz.pengeluaranku.ui.theme.poppinsFontFamily
 import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 @Composable
 fun OutcomeHistory(
@@ -38,7 +40,10 @@ fun OutcomeHistory(
     quantity: Int
 ) {
     val decimalFormat = DecimalFormat("#,###")
-    Box(
+    val locale =    Locale("in","ID")
+    val dateTimeFormatter = DateTimeFormatter.ofPattern("dd MMMM yyyy",locale)
+    val format = date.format(dateTimeFormatter)
+        Box(
         modifier = modifier
             .background(
                 color = colorResource(id = R.color.deepBlue),
@@ -66,7 +71,7 @@ fun OutcomeHistory(
                     .padding(start = 10.dp)
             ) {
                 Text(text = name, fontFamily = poppinsFontFamily, color = Color.White)
-                Text(text = date.toString(), fontFamily = poppinsFontFamily, color = Color.White)
+                Text(text = format.toString(), fontFamily = poppinsFontFamily, color = Color.White)
             }
             Box(modifier = modifier.fillMaxWidth(), contentAlignment = Alignment.CenterEnd) {
                 Box(

@@ -1,5 +1,7 @@
 [versions]
 agp = "8.5.2"
+animation = "1.6.8"
+animationVersion = "1.5.1"
 coreSplashscreen = "1.0.1"
 graphicsShapes = "1.0.0-rc01"
 kotlin = "1.9.0"
@@ -12,16 +14,20 @@ activityCompose = "1.9.0"
 composeBom = "2024.04.01"
 materialIconsExtended = "1.6.8"
 navigationCompose = "2.7.7"
+navigationComposeVersion = "2.6.0"
 sqliteKtx = "2.4.0"
 roomKtx = "2.6.1"
 constraintlayout = "2.1.4"
 
 [libraries]
+androidx-animation = { module = "androidx.compose.animation:animation", version.ref = "animation" }
+androidx-animation-v151 = { module = "androidx.compose.animation:animation", version.ref = "animationVersion" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
 androidx-graphics-shapes = { module = "androidx.graphics:graphics-shapes", version.ref = "graphicsShapes" }
 androidx-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "materialIconsExtended" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
+androidx-navigation-compose-v260 = { module = "androidx.navigation:navigation-compose", version.ref = "navigationComposeVersion" }
 androidx-sqlite-ktx = { module = "androidx.sqlite:sqlite-ktx", version.ref = "sqliteKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }

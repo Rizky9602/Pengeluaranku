@@ -70,8 +70,6 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    // navigation
-    implementation (libs.androidx.navigation.compose)
 
     // icon
     implementation(libs.androidx.material.icons.extended)
@@ -84,4 +82,10 @@ dependencies {
 
     //chart
     implementation ("io.github.ehsannarmani:compose-charts:0.0.13")
+
+    //navigation
+    implementation (libs.androidx.navigation.compose)
+
+    //animation
+    implementation (libs.androidx.animation)
 }
