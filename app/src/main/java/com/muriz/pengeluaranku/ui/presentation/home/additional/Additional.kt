@@ -8,3 +8,8 @@ import androidx.navigation.NavHostController
 fun Additional(navHostController: NavHostController,modifier: Modifier = Modifier) {
     
 }
+
+@Composable
+fun AdditionalComponent(modifier: Modifier = Modifier) {
+    
+}

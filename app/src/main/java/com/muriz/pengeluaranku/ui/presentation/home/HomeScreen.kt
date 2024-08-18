@@ -70,7 +70,25 @@ fun HomeScreen(
         startDestination = "home",
         enterTransition = { EnterTransition.None },
         exitTransition = { ExitTransition.None }) {
-        composable(route = "home")
+        composable(route = "home",
+            enterTransition = {
+                slideIntoContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Down,
+                    tween(3000)
+                )
+            }, popExitTransition = {
+                slideOutOfContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Down,
+                    tween(3000)
+                )
+            },
+            popEnterTransition = {
+                slideIntoContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Down,
+                    tween(3000)
+                )
+            }
+            )
         {
             HomeScreenComponent(
                 name = name,
@@ -87,14 +105,14 @@ fun HomeScreen(
         composable(route = "Additional",
             enterTransition = {
                 slideIntoContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Up,
-                    tween(300, easing = EaseIn)
+                    AnimatedContentTransitionScope.SlideDirection.Down,
+                    tween(3000)
                 )
             },
             exitTransition = {
                 slideOutOfContainer(
                     AnimatedContentTransitionScope.SlideDirection.Down,
-                    tween(1000, easing = EaseOut)
+                    tween(3000)
                 )
             }) {
             Additional(navHostController = navController)
