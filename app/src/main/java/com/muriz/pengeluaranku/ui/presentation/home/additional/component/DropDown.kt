@@ -68,6 +68,7 @@ fun DropDown(
                 Text(
                     text = "Kategori Outcome",
                     fontFamily = poppinsFontFamily,
+                    color = Color.Black
                 )
             },
             trailingIcon = {
@@ -81,6 +82,9 @@ fun DropDown(
                 focusedBorderColor = Color.LightGray,
                 unfocusedBorderColor = Color.LightGray,
                 disabledBorderColor = Color.LightGray,
+                focusedContainerColor = Color.White,
+                unfocusedContainerColor = Color.White,
+                disabledContainerColor = Color.White
             )
         )
 

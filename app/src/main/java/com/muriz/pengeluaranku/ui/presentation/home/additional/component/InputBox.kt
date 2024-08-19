@@ -37,22 +37,25 @@ fun InputBox(modifier: Modifier = Modifier, inputName: String) {
             fontSize = 25.sp,
             modifier = modifier.padding(bottom = 10.dp)
         )
-        TextField(
+        OutlinedTextField(
             value = text,
             onValueChange = { text = it },
-            textStyle = TextStyle(fontFamily = poppinsFontFamily),
+            textStyle = TextStyle(fontFamily = poppinsFontFamily, fontSize = 15.sp, color = Color.Black),
             colors = OutlinedTextFieldDefaults.colors(
                 focusedBorderColor = Color.LightGray,
                 unfocusedBorderColor = Color.LightGray,
                 disabledBorderColor = Color.LightGray,
                 focusedContainerColor = Color.White,
-                unfocusedContainerColor = Color.White
+                unfocusedContainerColor = Color.White,
+                disabledContainerColor = Color.White
             ),
             modifier = modifier.fillMaxWidth(),
             shape = RoundedCornerShape(5.dp)
         )
+
     }
 }
+
 
 @Preview(showBackground = true, backgroundColor = 0x0000000)
 @Composable
