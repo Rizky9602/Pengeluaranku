@@ -54,7 +54,6 @@ fun DropDown(
         expanded = expanded,
         onExpandedChange = { expanded = !expanded }
     ) {
-
         OutlinedTextField(
             value = selectedItem,
             readOnly = true,

@@ -24,6 +24,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.muriz.pengeluaranku.R
 import com.muriz.pengeluaranku.entity.CategoryOutcome
+import com.muriz.pengeluaranku.ui.presentation.home.additional.component.DatePickers
+import com.muriz.pengeluaranku.ui.presentation.home.additional.component.DatePickers
 import com.muriz.pengeluaranku.ui.presentation.home.additional.component.DropDown
 import com.muriz.pengeluaranku.ui.presentation.home.additional.component.InputBox
 import com.muriz.pengeluaranku.ui.theme.poppinsFontFamily
@@ -74,14 +76,17 @@ fun OutcomeScreen(modifier: Modifier = Modifier) {
             fontFamily = poppinsFontFamily,
             fontSize = 25.sp,
             color = Color.White,
-            modifier = modifier.align(Alignment.Start).padding(top = 25.dp)
+            modifier = modifier
+                .align(Alignment.Start)
+                .padding(top = 25.dp)
         )
         DropDown(
             dataDropDown = dataDropDown,
             onItemSelected = { item -> selectedCategory = item },
             ket = "Outcome"
         )
-        InputBox(inputName = "Nama", modifier = Modifier.padding(top = 5.dp))
+        InputBox(inputName = "Nama", modifier = Modifier.padding(top = 10.dp))
+        DatePickers()
     }
 }
 

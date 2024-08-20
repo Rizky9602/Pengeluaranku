@@ -40,7 +40,7 @@ fun OutcomeHistory(
     quantity: Int
 ) {
     val decimalFormat = DecimalFormat("#,###")
-    val locale =    Locale("in","ID")
+    val locale = Locale("in","ID")
     val dateTimeFormatter = DateTimeFormatter.ofPattern("dd MMMM yyyy",locale)
     val format = date.format(dateTimeFormatter)
         Box(
