@@ -37,7 +37,8 @@ import com.muriz.pengeluaranku.ui.theme.poppinsFontFamily
 fun DropDown(
     modifier: Modifier = Modifier,
     dataDropDown: List<String>,
-    onItemSelected: (String) -> Unit
+    onItemSelected: (String) -> Unit,
+    ket : String
 ) {
     var expanded by remember { mutableStateOf(false) }
     var selectedItem by remember { mutableStateOf("") }
@@ -66,7 +67,7 @@ fun DropDown(
                 .menuAnchor(),
             label = {
                 Text(
-                    text = "Kategori Outcome",
+                    text = "Kategori $ket",
                     fontFamily = poppinsFontFamily,
                     color = Color.Black
                 )

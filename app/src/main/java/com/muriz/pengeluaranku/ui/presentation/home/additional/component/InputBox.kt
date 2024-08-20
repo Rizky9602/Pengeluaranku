@@ -33,9 +33,9 @@ fun InputBox(modifier: Modifier = Modifier, inputName: String) {
         Text(
             text = inputName,
             fontFamily = poppinsFontFamily,
-            color = Color.Black,
+            color = Color.White,
             fontSize = 25.sp,
-            modifier = modifier.padding(bottom = 10.dp)
+            modifier = modifier.padding(bottom = 5.dp)
         )
         OutlinedTextField(
             value = text,

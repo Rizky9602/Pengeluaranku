@@ -73,11 +73,15 @@ fun OutcomeScreen(modifier: Modifier = Modifier) {
             text = "Pilih Kategori",
             fontFamily = poppinsFontFamily,
             fontSize = 25.sp,
-            color = Color.Black,
-            modifier = modifier.align(Alignment.Start)
+            color = Color.White,
+            modifier = modifier.align(Alignment.Start).padding(top = 25.dp)
         )
-        DropDown(dataDropDown = dataDropDown, onItemSelected = { item -> selectedCategory = item })
-        InputBox(inputName = "Nama")
+        DropDown(
+            dataDropDown = dataDropDown,
+            onItemSelected = { item -> selectedCategory = item },
+            ket = "Outcome"
+        )
+        InputBox(inputName = "Nama", modifier = Modifier.padding(top = 5.dp))
     }
 }
 
