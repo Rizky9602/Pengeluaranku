@@ -2,8 +2,10 @@ package com.muriz.pengeluaranku.ui.presentation.home.additional.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -22,6 +24,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
@@ -49,7 +52,16 @@ fun DropDown(
     } else {
         Icons.Filled.KeyboardArrowDown
     }
-
+Column(modifier.padding(top=10.dp)) {
+    Text(
+        text = "Pilih Kategori",
+        fontFamily = poppinsFontFamily,
+        fontSize = 25.sp,
+        color = Color.White,
+        modifier = modifier
+            .align(Alignment.Start)
+            .padding(top = 25.dp)
+    )
     ExposedDropdownMenuBox(
         expanded = expanded,
         onExpandedChange = { expanded = !expanded }
@@ -68,7 +80,8 @@ fun DropDown(
                 Text(
                     text = "Kategori $ket",
                     fontFamily = poppinsFontFamily,
-                    color = Color.Black
+                    color = Color.Gray,
+                    fontSize = 15.sp
                 )
             },
             trailingIcon = {
@@ -104,4 +117,6 @@ fun DropDown(
             }
         }
     }
+}
+
 }

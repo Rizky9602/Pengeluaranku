@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.Wallpapers
 import androidx.compose.ui.unit.dp
@@ -28,7 +29,12 @@ import androidx.compose.ui.unit.sp
 import com.muriz.pengeluaranku.ui.theme.poppinsFontFamily
 
 @Composable
-fun InputBox(modifier: Modifier = Modifier, inputName: String) {
+fun InputBox(
+    modifier: Modifier = Modifier,
+    inputName: String,
+    keyboardType: KeyboardType = KeyboardType.Text,
+    label : String = ""
+) {
     var text by remember { mutableStateOf("") }
 
     Column(modifier.fillMaxWidth()) {
@@ -42,7 +48,12 @@ fun InputBox(modifier: Modifier = Modifier, inputName: String) {
         OutlinedTextField(
             value = text,
             onValueChange = { text = it },
-            textStyle = TextStyle(fontFamily = poppinsFontFamily, fontSize = 15.sp, color = Color.Black),
+            textStyle = TextStyle(
+                fontFamily = poppinsFontFamily,
+                fontSize = 15.sp,
+                color = Color.Black
+            ),
+            label = { Text(text = label , fontFamily = poppinsFontFamily, fontSize = 15.sp, maxLines = 1)},
             colors = OutlinedTextFieldDefaults.colors(
                 focusedBorderColor = Color.LightGray,
                 unfocusedBorderColor = Color.LightGray,
@@ -54,7 +65,10 @@ fun InputBox(modifier: Modifier = Modifier, inputName: String) {
             modifier = modifier.fillMaxWidth(),
             shape = RoundedCornerShape(5.dp),
             maxLines = 1,
-            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done)
+            keyboardOptions = KeyboardOptions(
+                imeAction = ImeAction.Done,
+                keyboardType = keyboardType
+            )
         )
 
     }

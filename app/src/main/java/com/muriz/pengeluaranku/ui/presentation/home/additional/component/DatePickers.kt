@@ -29,10 +29,14 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import androidx.compose.material3.DatePicker
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.muriz.pengeluaranku.ui.theme.poppinsFontFamily
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -49,11 +53,19 @@ fun DatePickers(modifier: Modifier = Modifier) {
             showDatePicker = false
         }
     }
-    Column {
+
+
+    Column(modifier.padding(top = 10.dp)) {
+        Text(
+            text = "Tanggal",
+            fontFamily = poppinsFontFamily,
+            fontSize = 25.sp,
+            color = Color.White
+        )
         OutlinedTextField(
             value = selectedDate,
             onValueChange = { },
-            label = { Text(text = "Pilih Tanggal") },
+            label = { Text(text = "Pilih Tanggal" , color = Color.Gray, fontSize = 15.sp) },
             readOnly = true,
             trailingIcon = {
                 IconButton(onClick = { showDatePicker = !showDatePicker }) {
@@ -64,7 +76,15 @@ fun DatePickers(modifier: Modifier = Modifier) {
                 }
             },
             modifier = modifier
-                .fillMaxWidth()
+                .fillMaxWidth(),
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedBorderColor = Color.LightGray,
+                unfocusedBorderColor = Color.LightGray,
+                disabledBorderColor = Color.LightGray,
+                focusedContainerColor = Color.White,
+                unfocusedContainerColor = Color.White,
+                disabledContainerColor = Color.White
+            )
         )
         if (showDatePicker) {
             Popup(onDismissRequest = { showDatePicker = false }, alignment = Alignment.Center) {
@@ -89,6 +109,6 @@ fun DatePickers(modifier: Modifier = Modifier) {
 }
 
 fun convertMillisToDate(millis: Long): String {
-    val formatter = SimpleDateFormat("dd MMMM yyyy", Locale("in","ID"))
+    val formatter = SimpleDateFormat("dd MMMM yyyy", Locale("in", "ID"))
     return formatter.format(Date(millis))
 }
