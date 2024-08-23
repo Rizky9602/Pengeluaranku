@@ -7,6 +7,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -33,6 +34,7 @@ import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -43,10 +45,15 @@ import com.muriz.pengeluaranku.ui.theme.poppinsFontFamily
 fun DatePickers(modifier: Modifier = Modifier) {
     var showDatePicker by remember { mutableStateOf(false) }
     val datePickerState = rememberDatePickerState()
-    val selectedDate = datePickerState.selectedDateMillis?.let {
+    var selectedDate = datePickerState.selectedDateMillis?.let {
         convertMillisToDate(it)
-    } ?: ""
+    } ?: "Pilih Tanggal"
 
+    var selectColor = if(datePickerState.selectedDateMillis != null){
+        Color.Black
+    }else{
+        Color.LightGray
+    }
 
     LaunchedEffect(datePickerState.selectedDateMillis) {
         if (datePickerState.selectedDateMillis != null) {
@@ -59,13 +66,12 @@ fun DatePickers(modifier: Modifier = Modifier) {
         Text(
             text = "Tanggal",
             fontFamily = poppinsFontFamily,
-            fontSize = 25.sp,
+            fontSize = 20.sp,
             color = Color.White
         )
         OutlinedTextField(
             value = selectedDate,
-            onValueChange = { },
-            label = { Text(text = "Pilih Tanggal" , color = Color.Gray, fontSize = 15.sp) },
+            onValueChange = { selectedDate = it},
             readOnly = true,
             trailingIcon = {
                 IconButton(onClick = { showDatePicker = !showDatePicker }) {
@@ -75,8 +81,9 @@ fun DatePickers(modifier: Modifier = Modifier) {
                     )
                 }
             },
+            textStyle = TextStyle(fontSize = 16.sp, fontFamily = poppinsFontFamily , color = selectColor),
             modifier = modifier
-                .fillMaxWidth(),
+                .fillMaxWidth().height(60.dp),
             colors = OutlinedTextFieldDefaults.colors(
                 focusedBorderColor = Color.LightGray,
                 unfocusedBorderColor = Color.LightGray,

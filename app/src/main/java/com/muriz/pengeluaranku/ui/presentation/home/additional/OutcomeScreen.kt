@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.muriz.pengeluaranku.R
 import com.muriz.pengeluaranku.entity.CategoryOutcome
+import com.muriz.pengeluaranku.ui.presentation.home.additional.component.ConfirmationButton
 import com.muriz.pengeluaranku.ui.presentation.home.additional.component.DatePickers
 //import com.muriz.pengeluaranku.ui.presentation.home.additional.component.DatePickers
 //import com.muriz.pengeluaranku.ui.presentation.home.additional.component.DatePickers
@@ -58,7 +59,7 @@ fun OutcomeScreen(modifier: Modifier = Modifier) {
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier.padding(start = 50.dp, end = 50.dp)
+        modifier = modifier.padding(start = 60.dp, end = 60.dp).background(Color.Black)
     ) {
         Box(
             modifier = modifier
@@ -86,6 +87,7 @@ fun OutcomeScreen(modifier: Modifier = Modifier) {
             modifier = modifier.padding(top = 10.dp),
             label = "Rp"
         )
+        ConfirmationButton(modifier = modifier.padding(top = 50.dp))
     }
 }
 

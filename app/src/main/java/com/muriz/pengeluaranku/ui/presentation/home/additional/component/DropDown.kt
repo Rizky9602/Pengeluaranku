@@ -30,6 +30,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.toSize
@@ -41,10 +42,10 @@ fun DropDown(
     modifier: Modifier = Modifier,
     dataDropDown: List<String>,
     onItemSelected: (String) -> Unit,
-    ket : String
+    ket: String
 ) {
     var expanded by remember { mutableStateOf(false) }
-    var selectedItem by remember { mutableStateOf("") }
+    var selectedItem by remember { mutableStateOf("kategori $ket") }
     var textFiledSize by remember { mutableStateOf(Size.Zero) }
 
     val icon = if (expanded) {
@@ -52,71 +53,79 @@ fun DropDown(
     } else {
         Icons.Filled.KeyboardArrowDown
     }
-Column(modifier.padding(top=10.dp)) {
-    Text(
-        text = "Pilih Kategori",
-        fontFamily = poppinsFontFamily,
-        fontSize = 25.sp,
-        color = Color.White,
-        modifier = modifier
-            .align(Alignment.Start)
-            .padding(top = 25.dp)
-    )
-    ExposedDropdownMenuBox(
-        expanded = expanded,
-        onExpandedChange = { expanded = !expanded }
-    ) {
-        OutlinedTextField(
-            value = selectedItem,
-            readOnly = true,
-            onValueChange = { selectedItem = it },
-            modifier = modifier
-                .fillMaxWidth()
-                .onGloballyPositioned { layoutCoordinates ->
-                    textFiledSize = layoutCoordinates.size.toSize()
-                }
-                .menuAnchor(),
-            label = {
-                Text(
-                    text = "Kategori $ket",
-                    fontFamily = poppinsFontFamily,
-                    color = Color.Gray,
-                    fontSize = 15.sp
-                )
-            },
-            trailingIcon = {
-                Icon(icon, null,
-                    modifier
-                        .clickable { expanded = !expanded }
-                        .menuAnchor())
-            },
-            shape = RoundedCornerShape(5.dp),
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = Color.LightGray,
-                unfocusedBorderColor = Color.LightGray,
-                disabledBorderColor = Color.LightGray,
-                focusedContainerColor = Color.White,
-                unfocusedContainerColor = Color.White,
-                disabledContainerColor = Color.White
-            )
-        )
 
-        DropdownMenu(
-            expanded = expanded,
-            onDismissRequest = { expanded = false },
+    var textColor = Color.LightGray
+
+    Column {
+        Text(
+            text = "Pilih Kategori",
+            fontFamily = poppinsFontFamily,
+            fontSize = 20.sp,
+            color = Color.White,
             modifier = modifier
-                .width(with(LocalDensity.current) { textFiledSize.width.toDp() })
-                .background(color = Color.White),
+                .align(Alignment.Start)
+                .padding(top = 25.dp)
+        )
+        ExposedDropdownMenuBox(
+            expanded = expanded,
+            onExpandedChange = { expanded = !expanded }
         ) {
-            dataDropDown.forEach { label ->
-                DropdownMenuItem(text = { Text(label, fontFamily = poppinsFontFamily) }, onClick = {
-                    selectedItem = label
-                    expanded = false
-                    onItemSelected(label)
-                })
+            OutlinedTextField(
+                value = selectedItem,
+                readOnly = true,
+                onValueChange = { selectedItem = it },
+                modifier = modifier
+                    .fillMaxWidth()
+                    .onGloballyPositioned { layoutCoordinates ->
+                        textFiledSize = layoutCoordinates.size.toSize()
+                    }
+                    .menuAnchor()
+                    .height(60.dp),
+                trailingIcon = {
+                    Icon(icon, null,
+                        modifier
+                            .clickable { expanded = !expanded }
+                            .menuAnchor())
+                },
+                shape = RoundedCornerShape(5.dp),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = Color.LightGray,
+                    unfocusedBorderColor = Color.LightGray,
+                    disabledBorderColor = Color.LightGray,
+                    focusedContainerColor = Color.White,
+                    unfocusedContainerColor = Color.White,
+                    disabledContainerColor = Color.White
+                ),
+                textStyle = TextStyle(
+                    fontFamily = poppinsFontFamily,
+                    fontSize = 16.sp,
+                    color = textColor
+                )
+            )
+
+            DropdownMenu(
+                expanded = expanded,
+                onDismissRequest = { expanded = false },
+                modifier = modifier
+                    .width(with(LocalDensity.current) { textFiledSize.width.toDp() })
+                    .background(color = Color.White),
+            ) {
+                dataDropDown.forEach { label ->
+                    DropdownMenuItem(text = {
+                        Text(
+                            label,
+                            fontFamily = poppinsFontFamily,
+                            fontSize = 16.sp
+                        )
+                    }, onClick = {
+                        selectedItem = label
+                        expanded = false
+                        onItemSelected(label)
+                        textColor = Color.Black
+                    })
+                }
             }
         }
     }
-}
 
 }

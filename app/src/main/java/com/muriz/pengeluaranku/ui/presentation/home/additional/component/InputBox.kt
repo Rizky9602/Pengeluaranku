@@ -42,18 +42,18 @@ fun InputBox(
             text = inputName,
             fontFamily = poppinsFontFamily,
             color = Color.White,
-            fontSize = 25.sp,
-            modifier = modifier.padding(bottom = 5.dp)
+            fontSize = 20.sp,
+            modifier = modifier
         )
         OutlinedTextField(
             value = text,
-            onValueChange = { text = it },
+            onValueChange = { text = it},
             textStyle = TextStyle(
                 fontFamily = poppinsFontFamily,
-                fontSize = 15.sp,
+                fontSize = 16.sp,
                 color = Color.Black
             ),
-            label = { Text(text = label , fontFamily = poppinsFontFamily, fontSize = 15.sp, maxLines = 1)},
+            label = { Text(text = label , fontSize = 16.sp, fontFamily = poppinsFontFamily, color = Color.LightGray)},
             colors = OutlinedTextFieldDefaults.colors(
                 focusedBorderColor = Color.LightGray,
                 unfocusedBorderColor = Color.LightGray,
@@ -62,7 +62,9 @@ fun InputBox(
                 unfocusedContainerColor = Color.White,
                 disabledContainerColor = Color.White
             ),
-            modifier = modifier.fillMaxWidth(),
+            modifier = modifier
+                .fillMaxWidth()
+                .height(60.dp),
             shape = RoundedCornerShape(5.dp),
             maxLines = 1,
             keyboardOptions = KeyboardOptions(
