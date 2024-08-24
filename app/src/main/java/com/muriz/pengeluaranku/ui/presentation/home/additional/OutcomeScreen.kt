@@ -87,7 +87,7 @@ fun OutcomeScreen(modifier: Modifier = Modifier) {
             modifier = modifier.padding(top = 10.dp),
             label = "Rp"
         )
-        ConfirmationButton(modifier = modifier.padding(top = 50.dp))
+        ConfirmationButton(modifier = modifier.padding(top = 40.dp))
     }
 }
 

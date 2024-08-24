@@ -1,5 +1,6 @@
 package com.muriz.pengeluaranku.ui.presentation.home.additional.component
 
+import androidx.compose.animation.core.VisibilityThreshold
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -31,6 +32,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.toSize
@@ -56,7 +58,7 @@ fun DropDown(
 
     var textColor = Color.LightGray
 
-    Column {
+    Column() {
         Text(
             text = "Pilih Kategori",
             fontFamily = poppinsFontFamily,
@@ -68,7 +70,8 @@ fun DropDown(
         )
         ExposedDropdownMenuBox(
             expanded = expanded,
-            onExpandedChange = { expanded = !expanded }
+            onExpandedChange = { expanded = !expanded },
+
         ) {
             OutlinedTextField(
                 value = selectedItem,
@@ -99,8 +102,8 @@ fun DropDown(
                 textStyle = TextStyle(
                     fontFamily = poppinsFontFamily,
                     fontSize = 16.sp,
-                    color = textColor
-                )
+                    color = textColor,
+                ), singleLine = true
             )
 
             DropdownMenu(
@@ -115,14 +118,14 @@ fun DropDown(
                         Text(
                             label,
                             fontFamily = poppinsFontFamily,
-                            fontSize = 16.sp
+                            fontSize = 16.sp,
                         )
                     }, onClick = {
                         selectedItem = label
                         expanded = false
                         onItemSelected(label)
                         textColor = Color.Black
-                    })
+                    } , )
                 }
             }
         }

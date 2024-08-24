@@ -70,7 +70,8 @@ fun InputBox(
             keyboardOptions = KeyboardOptions(
                 imeAction = ImeAction.Done,
                 keyboardType = keyboardType
-            )
+            ),
+            singleLine = true
         )
 
     }
