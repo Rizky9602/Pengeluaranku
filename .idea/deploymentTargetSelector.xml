@@ -5,25 +5,6 @@
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="MainActivity">
-        <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2024-08-05T11:55:01.265947Z">
-          <Target type="DEFAULT_BOOT">
-            <handle>
-              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\rizky\.android\avd\Pixel_8_API_30.avd" />
-            </handle>
-          </Target>
-        </DropdownSelection>
-        <DialogSelection>
-          <targets>
-            <Target type="DEFAULT_BOOT">
-              <handle>
-                <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\rizky\.android\avd\Pixel_8_API_30.avd" />
-              </handle>
-            </Target>
-          </targets>
-        </DialogSelection>
-      </SelectionState>
       <SelectionState runConfigName="Test">
         <option name="selectionMode" value="DROPDOWN" />
         <DropdownSelection timestamp="2024-08-06T14:15:28.115352500Z">
@@ -36,6 +17,9 @@
         <DialogSelection />
       </SelectionState>
       <SelectionState runConfigName="Test (1)">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="TestAdditional">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

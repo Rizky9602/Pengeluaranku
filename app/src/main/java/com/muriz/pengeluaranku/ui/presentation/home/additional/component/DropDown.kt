@@ -58,7 +58,7 @@ fun DropDown(
 
     var textColor = Color.LightGray
 
-    Column() {
+    Column {
         Text(
             text = "Pilih Kategori",
             fontFamily = poppinsFontFamily,
@@ -102,7 +102,6 @@ fun DropDown(
                 textStyle = TextStyle(
                     fontFamily = poppinsFontFamily,
                     fontSize = 16.sp,
-                    color = textColor,
                 ), singleLine = true
             )
 
@@ -124,7 +123,6 @@ fun DropDown(
                         selectedItem = label
                         expanded = false
                         onItemSelected(label)
-                        textColor = Color.Black
                     } , )
                 }
             }

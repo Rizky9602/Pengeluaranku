@@ -59,7 +59,7 @@ fun OutcomeScreen(modifier: Modifier = Modifier) {
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier.padding(start = 60.dp, end = 60.dp).background(Color.Black)
+        modifier = modifier.padding(start = 60.dp, end = 60.dp)
     ) {
         Box(
             modifier = modifier

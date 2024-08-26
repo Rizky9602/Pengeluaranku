@@ -1,5 +1,6 @@
 package com.muriz.pengeluaranku.ui.presentation.home.additional.component
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -19,6 +20,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.Placeholder
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -33,7 +35,7 @@ fun InputBox(
     modifier: Modifier = Modifier,
     inputName: String,
     keyboardType: KeyboardType = KeyboardType.Text,
-    label : String = ""
+    label: String = ""
 ) {
     var text by remember { mutableStateOf("") }
 
@@ -47,13 +49,18 @@ fun InputBox(
         )
         OutlinedTextField(
             value = text,
-            onValueChange = { text = it},
+            onValueChange = { text = it },
             textStyle = TextStyle(
                 fontFamily = poppinsFontFamily,
                 fontSize = 16.sp,
                 color = Color.Black
             ),
-            label = { Text(text = label , fontSize = 16.sp, fontFamily = poppinsFontFamily, color = Color.LightGray)},
+            placeholder = {
+                Text(text = label,
+                    fontSize = 16.sp,
+                    fontFamily = poppinsFontFamily,
+                    color = Color.LightGray,)
+            },
             colors = OutlinedTextFieldDefaults.colors(
                 focusedBorderColor = Color.LightGray,
                 unfocusedBorderColor = Color.LightGray,

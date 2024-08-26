@@ -115,7 +115,7 @@ fun HomeScreen(
                     tween(3000)
                 )
             }) {
-            Additional(navHostController = navController)
+//            Additional(navHostController = navController)
         }
     }
 }
