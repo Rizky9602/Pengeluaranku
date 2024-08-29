@@ -1,155 +1,133 @@
 package com.muriz.pengeluaranku.ui.presentation.home.additional
 
+
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRow
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
 import com.muriz.pengeluaranku.R
 import com.muriz.pengeluaranku.ui.theme.poppinsFontFamily
-import org.w3c.dom.Text
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun Additional(modifier: Modifier = Modifier) {
 
-    val additionalContent = listOf(
-        TabItem(
-            content = { OutcomeScreen() },
-            unSelectedText = {
-                Text(
-                    text = "Outcome",
-                    fontFamily = poppinsFontFamily,
-                    fontSize = 14.sp,
-                    color = Color.White.copy(alpha = 0.5f)
-                )
-            },
-            selectedText = {
-                Text(
-                    text = "Outcome",
-                    fontFamily = poppinsFontFamily,
-                    fontSize = 14.sp,
-                    color = Color.White
-                )
-            }
+    val selectedScreenName = listOf(
+        ScreenAdditional(
+            name = "Outcome",
+            screen = { OutcomeScreen() }
         ),
-        TabItem(
-            content = { IncomeScreen() },
-            unSelectedText = {
-                Text(
-                    text = "Income",
-                    fontFamily = poppinsFontFamily,
-                    fontSize = 14.sp,
-                    color = Color.White.copy(alpha = 0.5f)
-                )
-            },
-            selectedText = {
-                Text(
-                    text = "Income",
-                    fontFamily = poppinsFontFamily,
-                    fontSize = 14.sp,
-                    color = Color.White
-                )
-            }
+        ScreenAdditional(
+            name = "Income",
+            screen = { IncomeScreen() }
         )
     )
+    var selectedScreen by remember { mutableStateOf("Outcome") }
 
-    @Composable
-    fun tabContent(index: Int, modifier: Modifier = Modifier) {
-        additionalContent.getOrNull(index)?.content?.invoke()
-    }
-
-    var selectedIndexItem by remember {
-        mutableIntStateOf(0)
-    }
-
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .background(color = colorResource(id = R.color.deepBlue))
-    ) {
-        Box(
-            modifier = modifier
-                .fillMaxWidth()
-                .height(60.dp)
-                .background(color = colorResource(id = R.color.deepBlue))
-        ) {}
-        TabRow(
-            selectedTabIndex = selectedIndexItem,
-            modifier = modifier
-                .padding(start = 10.dp, end = 10.dp)
-        ) {
-            additionalContent.forEachIndexed { index, tabItem ->
-                Tab(
-                    selected = index == selectedIndexItem,
-                    onClick = { selectedIndexItem = index },
-                    text =
-                    if (index == selectedIndexItem) {
-                        tabItem.selectedText
-                    } else {
-                        tabItem.unSelectedText
-                    },
-                    unselectedContentColor = colorResource(id = R.color.deepBlue),
-                    selectedContentColor = colorResource(id = R.color.lightBlue),
-                    modifier = modifier
-                        .height(40.dp)
-                        .border(
-                            BorderStroke(
-                                width = 1.dp, color = colorResource(
-                                    id = R.color.lightBlue
-                                )
-                            ),
-                            shape = RoundedCornerShape(topStart = 25.dp, topEnd = 25.dp),
-                        )
-                        .background(Color.Black)
-                )
+    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = modifier
+        .fillMaxSize()
+        .background(
+            color = colorResource(
+                id = R.color.deepBlue
+            )
+        )) {
+        Spacer(modifier = modifier.height(50.dp))
+        LazyRow {
+            items(selectedScreenName) { item ->
+                AdditionalView(
+                    name = item.name,
+                    selectedScreen = selectedScreen,
+                    onClickSelected = { selectedScreen = item.name })
             }
         }
-        Box(
-            modifier = modifier
-                .fillMaxSize()
-                .background(color = colorResource(id = R.color.lightBlue)),
-            contentAlignment = Alignment.TopCenter
-        ) {
-            tabContent(index = selectedIndexItem)
+        Box(modifier = modifier
+            .fillMaxSize()
+            .background(color = colorResource(id = R.color.lightBlue))
+            .padding(top = 40.dp)
+        )
+        {
+            if(selectedScreen == "Outcome"){
+                OutcomeScreen()
+            }else{
+                IncomeScreen()
+            }
         }
     }
 }
 
-data class TabItem(
-    val content: @Composable () -> Unit,
-    val unSelectedText: @Composable () -> Unit,
-    val selectedText: @Composable () -> Unit,
+@Composable
+fun AdditionalView(
+    name: String,
+    selectedScreen: String,
+    onClickSelected:  (String) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val colorContainer = if (name == selectedScreen) colorResource(id = R.color.lightBlue) else colorResource(
+        id = R.color.deepBlue)
+    val colorText = if (name == selectedScreen) Color.White else Color.White.copy(0.5f)
+
+    Card(
+        shape = RoundedCornerShape(topStart = 25.dp, topEnd = 25.dp),
+        colors = CardColors(
+            containerColor = colorContainer,
+            disabledContainerColor = colorContainer,
+            contentColor = colorText,
+            disabledContentColor = colorText,
+        ),
+        border = BorderStroke(1.dp, color = colorResource(id = R.color.lightBlue)),
+        modifier = modifier
+            .size(width = 180.dp, height = 45.dp)
+            .background(color = colorResource(id = R.color.deepBlue))
+            .padding(end = 5.dp),
+        onClick = {onClickSelected(name)}
+    ) {
+        Box (
+            modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ){
+            Text(
+                text = name,
+                fontFamily = poppinsFontFamily,
+                fontSize = 16.sp
+            )
+        }
+    }
+}
+
+data class ScreenAdditional(
+    val name: String,
+    val screen: @Composable () -> Unit
 )
 
-@Preview
+@Preview(showSystemUi = true)
 @Composable
-private fun TestAdditional() {
+private fun AdditionalPRev() {
     Additional()
 }
