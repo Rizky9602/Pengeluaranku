@@ -1,4 +1,4 @@
-package com.muriz.pengeluaranku.ui.presentation.home
+package com.muriz.pengeluaranku.ui.presentation.home.component
 
 import android.icu.text.DecimalFormat
 import androidx.compose.foundation.background
@@ -72,14 +72,13 @@ fun WalletCard(
                         fontSize = 12.sp
                     )
                     Text(
-                        text = "Rp ${decimalFormat.format(saldo)}",
+                        text = "Rp ${decimalFormat.format(saldo).replace(",",".")}",
                         fontWeight = FontWeight.Bold,
                         fontFamily = poppinsFontFamily,
                         fontSize = 25.sp
                     )
                 }
             }
-            Spacer(modifier = Modifier.size(60.dp))
             Box(modifier = modifier) {
                 PieChart(
                     modifier = modifier.size(100.dp),

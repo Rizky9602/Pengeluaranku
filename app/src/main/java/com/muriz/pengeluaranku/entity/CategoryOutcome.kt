@@ -16,8 +16,3 @@ enum class CategoryOutcome(val icon: Int, val color : Int, val names : String) {
     BELANJA_KEBUTUHAN(R.drawable.shopping,R.color.belanja,"Belanja Kebutuhan"),
     TRANSPORTASI(R.drawable.transport,R.color.transport,"Transportasi")
 }
-
-fun main() {
-    val data = CategoryOutcome.entries.forEach { it.names }
-    print(data  )
-}

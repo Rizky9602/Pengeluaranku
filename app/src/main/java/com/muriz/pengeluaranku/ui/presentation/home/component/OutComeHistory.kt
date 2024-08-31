@@ -1,4 +1,4 @@
-package com.muriz.pengeluaranku.ui.presentation.home
+package com.muriz.pengeluaranku.ui.presentation.home.component
 
 import android.icu.text.DecimalFormat
 import androidx.compose.foundation.BorderStroke
@@ -23,7 +23,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.muriz.pengeluaranku.R
 import com.muriz.pengeluaranku.ui.theme.poppinsFontFamily
@@ -86,7 +85,7 @@ fun OutcomeHistory(
                         ), contentAlignment = Alignment.Center
                 ) {
                     Text(
-                        text = "-${decimalFormat.format(quantity)}",
+                        text = "-${decimalFormat.format(quantity).replace(",",".")}",
                         color = Color.White,
                         fontFamily = poppinsFontFamily
                     )

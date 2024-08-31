@@ -2,15 +2,9 @@ package com.muriz.pengeluaranku.ui.presentation.home
 
 
 import androidx.compose.animation.AnimatedContentTransitionScope
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
-import androidx.compose.animation.core.EaseIn
-import androidx.compose.animation.core.EaseOut
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -30,9 +24,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -50,6 +41,9 @@ import com.muriz.pengeluaranku.R
 import com.muriz.pengeluaranku.entity.CategoryOutcome
 import com.muriz.pengeluaranku.entity.Outcome
 import com.muriz.pengeluaranku.ui.presentation.home.additional.Additional
+import com.muriz.pengeluaranku.ui.presentation.home.component.OutcomeHistory
+import com.muriz.pengeluaranku.ui.presentation.home.component.Profile
+import com.muriz.pengeluaranku.ui.presentation.home.component.WalletCard
 import com.muriz.pengeluaranku.ui.theme.poppinsFontFamily
 import java.time.LocalDate
 
@@ -74,20 +68,27 @@ fun HomeScreen(
             enterTransition = {
                 slideIntoContainer(
                     AnimatedContentTransitionScope.SlideDirection.Down,
-                    tween(3000)
+                    tween(500)
                 )
-            }, popExitTransition = {
+            }, exitTransition = {
+                slideOutOfContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Up,
+                    tween(500)
+                )
+            }
+            ,popExitTransition = {
                 slideOutOfContainer(
                     AnimatedContentTransitionScope.SlideDirection.Down,
-                    tween(3000)
+                    tween(500)
                 )
             },
             popEnterTransition = {
                 slideIntoContainer(
                     AnimatedContentTransitionScope.SlideDirection.Down,
-                    tween(3000)
+                    tween(500)
                 )
             }
+
             )
         {
             HomeScreenComponent(
@@ -105,17 +106,17 @@ fun HomeScreen(
         composable(route = "Additional",
             enterTransition = {
                 slideIntoContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Down,
-                    tween(3000)
+                    AnimatedContentTransitionScope.SlideDirection.Up,
+                    tween(500)
                 )
             },
             exitTransition = {
                 slideOutOfContainer(
                     AnimatedContentTransitionScope.SlideDirection.Down,
-                    tween(3000)
+                    tween(500)
                 )
             }) {
-//            Additional(navHostController = navController)
+            Additional()
         }
     }
 }
@@ -135,7 +136,7 @@ fun HomeScreenComponent(
     Scaffold(floatingActionButton = {
         FloatingActionButton(
             onClick = { navController.navigate("Additional") }, containerColor = Color.White,
-            modifier = modifier.offset((-15).dp, (-40).dp)
+            modifier = modifier.offset((-25).dp, (-60).dp)
         ) {
             Icon(
                 imageVector = Icons.Filled.Add,
@@ -156,7 +157,7 @@ fun HomeScreenComponent(
                         modifier = modifier
                             .background(color = colorResource(id = R.color.deepBlue))
                             .fillMaxWidth()
-                            .height(20.dp)
+                            .height(40.dp)
                     )
                 }
 
@@ -166,7 +167,7 @@ fun HomeScreenComponent(
                             .background(color = colorResource(id = R.color.deepBlue))
                             .fillMaxWidth()
                             .fillMaxHeight()
-                            .padding(start = 10.dp, end = 10.dp)
+                            .padding(start = 30.dp, end = 30.dp)
                     ) {
                         Profile(name = name, desc = desc, image = image)
                     }
@@ -177,7 +178,7 @@ fun HomeScreenComponent(
                         modifier = modifier
                             .background(color = colorResource(id = R.color.deepBlue))
                             .fillMaxWidth()
-                            .height(10.dp)
+                            .height(20.dp)
                     )
                 }
 
@@ -195,7 +196,7 @@ fun HomeScreenComponent(
                                 )
                                 .align(Alignment.TopCenter)
                         )
-                        WalletCard(saldo = saldo, income = income, outcome = outcome)
+                        WalletCard(saldo = saldo, income = income, outcome = outcome, modifier = modifier.padding(start = 20.dp, end = 20.dp))
                     }
                 }
 
@@ -213,12 +214,12 @@ fun HomeScreenComponent(
                         fontFamily = poppinsFontFamily,
                         color = Color.White,
                         fontSize = 16.sp,
-                        modifier = modifier.padding(start = 20.dp)
+                        modifier = modifier.padding(start = 50.dp)
                     )
                 }
 
                 items(dataOutcome) { dataOutcome ->
-                    Box(modifier = modifier.padding(10.dp)) {
+                    Box(modifier = modifier.padding(start = 30.dp, end = 30.dp, top = 10.dp)) {
                         OutcomeHistory(
                             icon = dataOutcome.category.icon,
                             name = dataOutcome.name,
@@ -299,9 +300,9 @@ private fun Test() {
         name = "Muhammad Rizky",
         desc = "Tetap hemat tahun depan akad nikah",
         image = R.drawable.pp,
-        saldo = 13500000,
+        saldo = 1350000,
         income = 1000000,
-        outcome = 500000,
+        outcome = 800000,
         dataOutcome = data
     )
 }
