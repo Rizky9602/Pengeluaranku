@@ -33,20 +33,21 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.muriz.pengeluaranku.R
 import com.muriz.pengeluaranku.ui.theme.poppinsFontFamily
 
 @Composable
-fun Additional(modifier: Modifier = Modifier) {
+fun Additional(modifier: Modifier = Modifier,navController: NavController) {
 
     val selectedScreenName = listOf(
         ScreenAdditional(
             name = "Outcome",
-            screen = { OutcomeScreen() }
+            screen = { OutcomeScreen(navController = navController) }
         ),
         ScreenAdditional(
             name = "Income",
-            screen = { IncomeScreen() }
+            screen = { IncomeScreen(navController = navController) }
         )
     )
     var selectedScreen by remember { mutableStateOf("Outcome") }
@@ -74,9 +75,9 @@ fun Additional(modifier: Modifier = Modifier) {
         )
         {
             if(selectedScreen == "Outcome"){
-                OutcomeScreen()
+                OutcomeScreen(navController = navController )
             }else{
-                IncomeScreen()
+                IncomeScreen(navController = navController)
             }
         }
     }
@@ -125,9 +126,3 @@ data class ScreenAdditional(
     val name: String,
     val screen: @Composable () -> Unit
 )
-
-@Preview(showSystemUi = true)
-@Composable
-private fun AdditionalPRev() {
-    Additional()
-}

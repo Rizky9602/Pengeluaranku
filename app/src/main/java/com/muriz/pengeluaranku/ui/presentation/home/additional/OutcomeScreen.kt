@@ -23,6 +23,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.muriz.pengeluaranku.R
 import com.muriz.pengeluaranku.entity.CategoryOutcome
 import com.muriz.pengeluaranku.ui.presentation.home.additional.component.ConfirmationButton
@@ -34,7 +35,7 @@ import com.muriz.pengeluaranku.ui.presentation.home.additional.component.InputBo
 import com.muriz.pengeluaranku.ui.theme.poppinsFontFamily
 
 @Composable
-fun OutcomeScreen(modifier: Modifier = Modifier) {
+fun OutcomeScreen(modifier: Modifier = Modifier,navController: NavController) {
     var iconChange by remember { mutableIntStateOf(R.drawable.question) }
     var selectedCategory by remember { mutableStateOf("") }
 
@@ -49,7 +50,6 @@ fun OutcomeScreen(modifier: Modifier = Modifier) {
             CategoryOutcome.MINUMAN.names -> iconChange = CategoryOutcome.MINUMAN.icon
             CategoryOutcome.BELANJA_KEBUTUHAN.names -> iconChange =
                 CategoryOutcome.BELANJA_KEBUTUHAN.icon
-
             CategoryOutcome.KELUARGA.names -> iconChange = CategoryOutcome.KELUARGA.icon
             CategoryOutcome.PAKAIAN.names -> iconChange = CategoryOutcome.PAKAIAN.icon
             CategoryOutcome.TRANSPORTASI.names -> iconChange = CategoryOutcome.TRANSPORTASI.icon
@@ -87,13 +87,6 @@ fun OutcomeScreen(modifier: Modifier = Modifier) {
             modifier = modifier.padding(top = 10.dp),
             label = "Rp"
         )
-        ConfirmationButton(modifier = modifier.padding(top = 40.dp))
+        ConfirmationButton(modifier = modifier.padding(top = 40.dp), navController = navController)
     }
-}
-
-
-@Preview(showBackground = true, backgroundColor = 0x0000000)
-@Composable
-private fun Test() {
-    OutcomeScreen()
 }

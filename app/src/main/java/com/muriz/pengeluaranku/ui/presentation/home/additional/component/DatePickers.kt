@@ -49,9 +49,9 @@ fun DatePickers(modifier: Modifier = Modifier) {
         convertMillisToDate(it)
     } ?: "Pilih Tanggal"
 
-    var selectColor = if(datePickerState.selectedDateMillis != null){
+    var selectColor = if (datePickerState.selectedDateMillis != null) {
         Color.Black
-    }else{
+    } else {
         Color.LightGray
     }
 
@@ -71,7 +71,7 @@ fun DatePickers(modifier: Modifier = Modifier) {
         )
         OutlinedTextField(
             value = selectedDate,
-            onValueChange = { selectedDate = it},
+            onValueChange = { selectedDate = it },
             readOnly = true,
             trailingIcon = {
                 IconButton(onClick = { showDatePicker = !showDatePicker }) {
@@ -81,9 +81,14 @@ fun DatePickers(modifier: Modifier = Modifier) {
                     )
                 }
             },
-            textStyle = TextStyle(fontSize = 16.sp, fontFamily = poppinsFontFamily , color = selectColor),
+            textStyle = TextStyle(
+                fontSize = 16.sp,
+                fontFamily = poppinsFontFamily,
+                color = selectColor
+            ),
             modifier = modifier
-                .fillMaxWidth().height(60.dp),
+                .fillMaxWidth()
+                .height(60.dp),
             colors = OutlinedTextFieldDefaults.colors(
                 focusedBorderColor = Color.LightGray,
                 unfocusedBorderColor = Color.LightGray,
@@ -98,17 +103,20 @@ fun DatePickers(modifier: Modifier = Modifier) {
             Popup(onDismissRequest = { showDatePicker = false }, alignment = Alignment.Center) {
                 Box(
                     modifier = modifier
-                        .background(color = Color.White)
                         .padding(start = 20.dp, end = 20.dp)
                         .fillMaxWidth()
-                        .border(
-                            border = BorderStroke(2.dp, Color.LightGray),
-                            shape = RoundedCornerShape(10.dp)
-                        )
+
                 ) {
                     DatePicker(
                         state = datePickerState,
                         showModeToggle = false,
+                        modifier = modifier.background(
+                            Color.White,
+                            shape = RoundedCornerShape(15.dp)
+                        ).border(
+                            border = BorderStroke(5.dp, Color.Black),
+                            shape = RoundedCornerShape(15.dp)
+                        )
                     )
                 }
             }

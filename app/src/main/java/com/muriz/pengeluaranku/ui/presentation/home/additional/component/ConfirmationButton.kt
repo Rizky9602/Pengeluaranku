@@ -16,18 +16,19 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.muriz.pengeluaranku.R
 import com.muriz.pengeluaranku.ui.theme.poppinsFontFamily
 
 @Composable
-fun ConfirmationButton(modifier: Modifier = Modifier) {
+fun ConfirmationButton(modifier: Modifier = Modifier, navController: NavController) {
 
     val simpanColor = colorResource(id = R.color.green)
     val batalColor = colorResource(id = R.color.red)
 
     Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = modifier.fillMaxWidth()) {
         Button(
-            onClick = { /*TODO*/ },
+            onClick = { navController.navigate("home") },
             shape = RoundedCornerShape(5.dp),
             colors = ButtonColors(
                 contentColor = Color.White,
@@ -54,10 +55,4 @@ fun ConfirmationButton(modifier: Modifier = Modifier) {
             Text(text = "Simpan", fontFamily = poppinsFontFamily,)
         }
     }
-}
-
-@Preview(showSystemUi = true)
-@Composable
-private fun Tests() {
-    ConfirmationButton()
 }

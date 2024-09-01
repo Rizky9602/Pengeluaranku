@@ -21,34 +21,31 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.muriz.pengeluaranku.R
-import com.muriz.pengeluaranku.entity.CategoryOutcome
+import com.muriz.pengeluaranku.entity.CategoryIncome
 import com.muriz.pengeluaranku.ui.presentation.home.additional.component.ConfirmationButton
 import com.muriz.pengeluaranku.ui.presentation.home.additional.component.DatePickers
 import com.muriz.pengeluaranku.ui.presentation.home.additional.component.DropDown
 import com.muriz.pengeluaranku.ui.presentation.home.additional.component.InputBox
 
 @Composable
-fun IncomeScreen(modifier: Modifier = Modifier) {
+fun IncomeScreen(modifier: Modifier = Modifier,navController: NavController) {
     var iconChange by remember { mutableIntStateOf(R.drawable.question) }
     var selectedCategory by remember { mutableStateOf("") }
 
     val dataDropDown: MutableList<String> = mutableListOf()
-    CategoryOutcome.entries.forEach { dataDropDown.add(it.names) }
+    CategoryIncome.entries.forEach { dataDropDown.add(it.names) }
+
 
     if (selectedCategory.isNotBlank()) {
         when (selectedCategory) {
-            CategoryOutcome.MAKANAN.names -> iconChange = CategoryOutcome.MAKANAN.icon
-            CategoryOutcome.CEMILAN.names -> iconChange = CategoryOutcome.CEMILAN.icon
-            CategoryOutcome.HIBURAN.names -> iconChange = CategoryOutcome.HIBURAN.icon
-            CategoryOutcome.MINUMAN.names -> iconChange = CategoryOutcome.MINUMAN.icon
-            CategoryOutcome.BELANJA_KEBUTUHAN.names -> iconChange =
-                CategoryOutcome.BELANJA_KEBUTUHAN.icon
-
-            CategoryOutcome.KELUARGA.names -> iconChange = CategoryOutcome.KELUARGA.icon
-            CategoryOutcome.PAKAIAN.names -> iconChange = CategoryOutcome.PAKAIAN.icon
-            CategoryOutcome.TRANSPORTASI.names -> iconChange = CategoryOutcome.TRANSPORTASI.icon
-            CategoryOutcome.TABUNGAN.names -> iconChange = CategoryOutcome.TABUNGAN.icon
+            CategoryIncome.GAJI.names -> iconChange = CategoryIncome.GAJI.icon
+            CategoryIncome.THR.names -> iconChange = CategoryIncome.THR.icon
+            CategoryIncome.BONUS.names -> iconChange = CategoryIncome.BONUS.icon
+            CategoryIncome.FREELANCE.names -> iconChange = CategoryIncome.FREELANCE.icon
+            CategoryIncome.ORANGTUA.names -> iconChange = CategoryIncome.ORANGTUA.icon
+            CategoryIncome.LAIN.names -> iconChange = CategoryIncome.LAIN.icon
         }
     }
 
@@ -82,13 +79,6 @@ fun IncomeScreen(modifier: Modifier = Modifier) {
             modifier = modifier.padding(top = 10.dp),
             label = "Rp"
         )
-        ConfirmationButton(modifier = modifier.padding(top = 40.dp))
+        ConfirmationButton(modifier = modifier.padding(top = 40.dp), navController = navController)
     }
-}
-
-
-@Preview(showBackground = true, backgroundColor = 0x0000000)
-@Composable
-private fun Test() {
-    OutcomeScreen()
 }
