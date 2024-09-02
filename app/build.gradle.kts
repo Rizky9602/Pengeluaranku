@@ -83,6 +83,9 @@ dependencies {
     //chart
     implementation ("io.github.ehsannarmani:compose-charts:0.0.13")
 
+    //chart 2
+    implementation("io.github.thechance101:chart:Beta-0.0.5")
+
     //navigation
     implementation (libs.androidx.navigation.compose)
 
