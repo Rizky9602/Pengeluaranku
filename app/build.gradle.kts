@@ -86,6 +86,7 @@ dependencies {
     //chart 2
     implementation("io.github.thechance101:chart:Beta-0.0.5")
 
+
     //navigation
     implementation (libs.androidx.navigation.compose)
 

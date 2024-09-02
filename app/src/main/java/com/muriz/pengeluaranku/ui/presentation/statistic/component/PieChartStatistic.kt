@@ -1,14 +1,11 @@
-package com.muriz.pengeluaranku.ui.presentation.monthly.component
+package com.muriz.pengeluaranku.ui.presentation.statistic.component
 
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.aay.compose.baseComponents.model.LegendPosition
 import com.aay.compose.donutChart.PieChart
 import com.aay.compose.donutChart.model.PieChartData
@@ -17,7 +14,7 @@ import com.muriz.pengeluaranku.entity.CategoryOutcome
 import com.muriz.pengeluaranku.ui.theme.poppinsFontFamily
 
 @Composable
-fun PieChartMonthly(
+fun PieChartStatistic(
     dataMakanan: Double,
     dataCemilan: Double,
     dataKeluarga: Double,
