@@ -122,7 +122,7 @@ fun HomeScreen(
 }
 
 @Composable
-fun HomeScreenComponent(
+private fun HomeScreenComponent(
     name: String,
     desc: String,
     image: Int,

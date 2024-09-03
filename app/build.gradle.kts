@@ -86,6 +86,8 @@ dependencies {
     //chart 2
     implementation("io.github.thechance101:chart:Beta-0.0.5")
 
+    //flowlayout
+    implementation ("com.google.accompanist:accompanist-flowlayout:0.35.2-beta")
 
     //navigation
     implementation (libs.androidx.navigation.compose)

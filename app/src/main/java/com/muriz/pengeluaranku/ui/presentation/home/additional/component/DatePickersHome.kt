@@ -121,7 +121,7 @@ fun DatePickers(modifier: Modifier = Modifier) {
     }
 }
 
-fun convertMillisToDate(millis: Long): String {
+private fun convertMillisToDate(millis: Long): String {
     val formatter = SimpleDateFormat("dd MMMM yyyy", Locale("in", "ID"))
     return formatter.format(Date(millis))
 }

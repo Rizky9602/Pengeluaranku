@@ -83,10 +83,3 @@ fun InputBox(
 
     }
 }
-
-
-@Preview(showBackground = true, backgroundColor = 0x0000000)
-@Composable
-private fun Test() {
-    InputBox(inputName = "Nama")
-}

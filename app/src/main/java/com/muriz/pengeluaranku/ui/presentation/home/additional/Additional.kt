@@ -84,7 +84,7 @@ fun Additional(modifier: Modifier = Modifier,navController: NavController) {
 }
 
 @Composable
-fun AdditionalView(
+private fun AdditionalView(
     name: String,
     selectedScreen: String,
     onClickSelected:  (String) -> Unit,
@@ -122,7 +122,7 @@ fun AdditionalView(
     }
 }
 
-data class ScreenAdditional(
+private data class ScreenAdditional(
     val name: String,
     val screen: @Composable () -> Unit
 )
