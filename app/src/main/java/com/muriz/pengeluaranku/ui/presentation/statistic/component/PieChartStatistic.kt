@@ -6,6 +6,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.unit.sp
 import com.aay.compose.baseComponents.model.LegendPosition
 import com.aay.compose.donutChart.PieChart
 import com.aay.compose.donutChart.model.PieChartData
@@ -72,7 +73,7 @@ fun PieChartStatistic(
     PieChart(
         pieChartData = pieChartData,
         ratioLineColor = Color.White,
-        textRatioStyle = TextStyle(color = Color.White, fontFamily = poppinsFontFamily,),
+        textRatioStyle = TextStyle(color = Color.White, fontFamily = poppinsFontFamily, fontSize = 9.sp),
         legendPosition = LegendPosition.DISAPPEAR,
         outerCircularColor = colorResource(id = R.color.deepBlue),
         animation = tween(1500),

@@ -1,5 +1,8 @@
 package com.muriz.pengeluaranku.ui.presentation.statistic.component
 
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -12,13 +15,13 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import  androidx.compose.material.AlertDialog
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
@@ -28,11 +31,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import com.muriz.pengeluaranku.R
 import com.muriz.pengeluaranku.ui.theme.poppinsFontFamily
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -41,20 +45,21 @@ fun DatePickerStatistic(
     visible: Boolean,
     currentMonth: Int,
     currentYear: Int,
-    onDimiss: () -> Unit,
+    onDismiss: () -> Unit,
+    selected: (Int, Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
 
     val months =
         listOf("Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agt", "Sep", "Okt", "Nov", "Des")
 
-    var month by remember { mutableStateOf(months[currentMonth]) }
+    var month by remember { mutableStateOf(months[currentMonth - 1]) }
     var year by remember { mutableStateOf(currentYear) }
     val interactionSource = remember { MutableInteractionSource() }
 
     if (visible) {
         Dialog(
-            onDismissRequest = onDimiss,
+            onDismissRequest = onDismiss,
         ) {
             Box(
                 modifier = modifier.background(
@@ -104,27 +109,60 @@ fun DatePickerStatistic(
                         )
                     }
 
-                    Card(modifier = modifier
-                        .fillMaxWidth()
-                        .padding(top = 30.dp)) {
-                        FlowRow(modifier = modifier.fillMaxWidth()) {
+                    Card(
+                        modifier = modifier
+                            .fillMaxWidth()
+                            .padding(top = 30.dp)
+                    ) {
+                        FlowRow(
+                            modifier = modifier.fillMaxWidth(),
+                            maxItemsInEachRow = 3,
+                            horizontalArrangement = Arrangement.Center
+                        ) {
+                            months.forEach {
+                                Box(
+                                    modifier = modifier
+                                        .size(60.dp)
+                                        .clickable(
+                                            indication = null,
+                                            interactionSource = interactionSource,
+                                            onClick = {
+                                                month = it
+                                                selected(months.indexOf(it) + 1, year)
+                                                !visible
+                                            }
+                                        )
+                                        .background(Color.Transparent),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    val animatedSize by animateDpAsState(
+                                        targetValue = if (it == month) 60.dp else 0.dp,
+                                        animationSpec = tween(
+                                            durationMillis = 500,
+                                            easing = LinearOutSlowInEasing
+                                        ), label = "selected animation"
+                                    )
 
+                                    Box(
+                                        modifier = modifier
+                                            .size(animatedSize)
+                                            .background(
+                                                color = if (it == month) colorResource(id = R.color.lightBlue) else Color.Transparent,
+                                                shape = CircleShape
+                                            )
+                                    )
+
+                                    Text(
+                                        text = it,
+                                        fontFamily = poppinsFontFamily,
+                                        color = if (it == month) Color.White else Color.Black
+                                    )
+                                }
+                            }
                         }
-
                     }
                 }
             }
         }
     }
-}
-
-@Preview
-@Composable
-private fun Test() {
-    var showDialog by remember { mutableStateOf(true) }
-    DatePickerStatistic(
-        visible = showDialog,
-        currentMonth = 9,
-        currentYear = 2024,
-        onDimiss = { showDialog = false })
 }
