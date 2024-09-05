@@ -26,7 +26,9 @@ import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.CalendarMonth
 import androidx.compose.material.icons.rounded.KeyboardArrowDown
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
@@ -54,8 +56,10 @@ fun DatePickerStatistic(
         listOf("Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agt", "Sep", "Okt", "Nov", "Des")
 
     var month by remember { mutableStateOf(months[currentMonth - 1]) }
-    var year by remember { mutableStateOf(currentYear) }
+    var year by remember { mutableIntStateOf(currentYear) }
     val interactionSource = remember { MutableInteractionSource() }
+
+    var temp : Int
 
     if (visible) {
         Dialog(
@@ -84,6 +88,7 @@ fun DatePickerStatistic(
                                     indication = null,
                                     onClick = {
                                         year--
+                                        selected( currentMonth,year)
                                     })
                         )
                         Text(
@@ -104,6 +109,7 @@ fun DatePickerStatistic(
                                     indication = null,
                                     onClick = {
                                         year++
+                                        selected( currentMonth,year)
                                     }
                                 )
                         )
@@ -129,7 +135,6 @@ fun DatePickerStatistic(
                                             onClick = {
                                                 month = it
                                                 selected(months.indexOf(it) + 1, year)
-                                                !visible
                                             }
                                         )
                                         .background(Color.Transparent),

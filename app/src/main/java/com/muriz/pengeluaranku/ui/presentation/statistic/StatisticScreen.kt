@@ -4,13 +4,16 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
@@ -29,7 +32,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.aay.compose.donutChart.model.PieChartData
 import com.muriz.pengeluaranku.R
+import com.muriz.pengeluaranku.entity.CategoryOutcome
 import com.muriz.pengeluaranku.ui.presentation.statistic.component.CategoryStatistic
 import com.muriz.pengeluaranku.ui.presentation.statistic.component.DatePickerStatistic
 import com.muriz.pengeluaranku.ui.presentation.statistic.component.PieChartStatistic
@@ -40,22 +45,14 @@ import java.util.Locale
 
 @Composable
 fun StatisticScreen(
-    dataMakanan: Double,
-    dataCemilan: Double,
-    dataKeluarga: Double,
-    dataPakaian: Double,
-    dataMinuman: Double,
-    dataTabungan: Double,
-    dataTranport: Double,
-    dataBelanja: Double,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier, pieChartData: List<PieChartData>
 ) {
 
     val formated = Locale("in", "ID")
     val date = LocalDate.now()
-    val month = date.format(DateTimeFormatter.ofPattern("MMMM yyyy", formated))
+    val month = date.format(DateTimeFormatter.ofPattern("MMMM", formated))
 
-    var dateLabel by remember { mutableStateOf(month) }
+    var dateLabel by remember { mutableStateOf("$month ${date.year}") }
     var visible by remember { mutableStateOf(false) }
 
     Column(
@@ -66,20 +63,13 @@ fun StatisticScreen(
             text = "Statistik Pengeluaran Bulan $month",
             fontFamily = poppinsFontFamily,
             color = Color.White,
-            fontSize = 15.sp,
+            fontSize = 16.sp,
             fontWeight = FontWeight.Bold,
-            modifier = modifier.padding(top = 20.dp, bottom = 20.dp )
+            modifier = modifier.padding(top = 20.dp, bottom = 20.dp)
         )
         PieChartStatistic(
-            dataMakanan = dataMakanan,
-            dataCemilan = dataCemilan,
-            dataKeluarga = dataKeluarga,
-            dataPakaian = dataPakaian,
-            dataMinuman = dataMinuman,
-            dataTabungan = dataTabungan,
-            dataTranport = dataTranport,
-            dataBelanja = dataBelanja,
-            modifier = modifier.size(300.dp)
+            modifier = modifier.size(300.dp),
+            pieChartData = pieChartData
         )
         Box(
             modifier = Modifier
@@ -88,24 +78,25 @@ fun StatisticScreen(
             contentAlignment = Alignment.TopCenter
         ) {
             Column {
+                Spacer(modifier.height(50.dp))
                 OutlinedTextField(
                     value = dateLabel,
                     onValueChange = { dateLabel = it },
                     readOnly = true,
                     trailingIcon = {
                         Icon(
-                            imageVector = Icons.Filled.KeyboardArrowDown,
+                            imageVector = Icons.Filled.CalendarMonth,
                             contentDescription = "Select date",
                             Modifier.clickable { visible = !visible }
                         )
                     },
                     textStyle = TextStyle(
-                        fontSize = 16.sp,
+                        fontSize = 15.sp,
                         fontFamily = poppinsFontFamily,
                         color = Color.LightGray
                     ),
                     modifier = modifier
-                        .fillMaxWidth()
+                        .width(200.dp)
                         .height(60.dp),
                     colors = OutlinedTextFieldDefaults.colors(
                         focusedBorderColor = Color.LightGray,
@@ -122,8 +113,8 @@ fun StatisticScreen(
                     currentMonth = date.monthValue,
                     currentYear = date.year,
                     onDismiss = { visible = false },
-                    selected = { month, year ->
-                        dateLabel = "$ $year"
+                    selected = { monthChange, year ->
+                        dateLabel = "${date.withMonth(monthChange).format(DateTimeFormatter.ofPattern("MMMM", formated))} $year"
                     }
                 )
             }
@@ -131,22 +122,24 @@ fun StatisticScreen(
     }
 }
 
-private fun SelectedMonth(value: Int) {
-    return
-}
-
 
 @Preview
 @Composable
 private fun StatisticScreenPrev() {
+    val pieChartData: List<PieChartData> = listOf(
+        PieChartData(
+            partName = CategoryOutcome.MAKANAN.names,
+            color = colorResource(id = CategoryOutcome.MAKANAN.color),
+            data = 2.0
+        ),
+        PieChartData(
+            partName = CategoryOutcome.CEMILAN.names,
+            color = colorResource(id = CategoryOutcome.CEMILAN.color),
+            data = 2.0
+        )
+    )
     StatisticScreen(
-        dataKeluarga = 0.0,
-        dataTabungan = 0.2,
-        dataTranport = 0.3,
-        dataBelanja = 0.1,
-        dataCemilan = 0.1,
-        dataMakanan = 0.1,
-        dataMinuman = 1.0,
-        dataPakaian = 2.0
+        modifier = Modifier,
+        pieChartData = pieChartData
     )
 }
