@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -14,7 +13,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CalendarMonth
-import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -35,7 +33,6 @@ import androidx.compose.ui.unit.sp
 import com.aay.compose.donutChart.model.PieChartData
 import com.muriz.pengeluaranku.R
 import com.muriz.pengeluaranku.entity.CategoryOutcome
-import com.muriz.pengeluaranku.ui.presentation.statistic.component.CategoryStatistic
 import com.muriz.pengeluaranku.ui.presentation.statistic.component.DatePickerStatistic
 import com.muriz.pengeluaranku.ui.presentation.statistic.component.PieChartStatistic
 import com.muriz.pengeluaranku.ui.theme.poppinsFontFamily
@@ -93,11 +90,11 @@ fun StatisticScreen(
                     textStyle = TextStyle(
                         fontSize = 15.sp,
                         fontFamily = poppinsFontFamily,
-                        color = Color.LightGray
+                        color = Color.Black
                     ),
                     modifier = modifier
-                        .width(200.dp)
-                        .height(60.dp),
+                        .width(250.dp)
+                        .height(50.dp),
                     colors = OutlinedTextFieldDefaults.colors(
                         focusedBorderColor = Color.LightGray,
                         unfocusedBorderColor = Color.LightGray,

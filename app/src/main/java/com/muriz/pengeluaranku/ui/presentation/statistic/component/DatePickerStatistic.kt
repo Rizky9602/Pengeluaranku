@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -68,14 +69,14 @@ fun DatePickerStatistic(
             Box(
                 modifier = modifier.background(
                     color = Color.White,
-                    shape = RoundedCornerShape(10.dp)
-                )
+                    shape = RoundedCornerShape(15.dp)
+                ).padding(5.dp).height(350.dp),
             ) {
-                Column {
+                Column(modifier = modifier.padding(top = 20.dp)) {
                     Row(
                         modifier = modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.Center,
-                        verticalAlignment = Alignment.CenterVertically
+                        verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Icon(
                             imageVector = Icons.Rounded.KeyboardArrowDown,
@@ -88,7 +89,6 @@ fun DatePickerStatistic(
                                     indication = null,
                                     onClick = {
                                         year--
-                                        selected( currentMonth,year)
                                     })
                         )
                         Text(
@@ -118,12 +118,14 @@ fun DatePickerStatistic(
                     Card(
                         modifier = modifier
                             .fillMaxWidth()
-                            .padding(top = 30.dp)
+                            .padding(top = 10.dp)
+                            .background(color = Color.Transparent),
+                        elevation = 0.dp
                     ) {
                         FlowRow(
                             modifier = modifier.fillMaxWidth(),
                             maxItemsInEachRow = 3,
-                            horizontalArrangement = Arrangement.Center
+                            horizontalArrangement = Arrangement.SpaceAround,
                         ) {
                             months.forEach {
                                 Box(
