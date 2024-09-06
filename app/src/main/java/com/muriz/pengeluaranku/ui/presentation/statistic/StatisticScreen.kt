@@ -5,11 +5,16 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CalendarMonth
@@ -33,8 +38,10 @@ import androidx.compose.ui.unit.sp
 import com.aay.compose.donutChart.model.PieChartData
 import com.muriz.pengeluaranku.R
 import com.muriz.pengeluaranku.entity.CategoryOutcome
+import com.muriz.pengeluaranku.ui.presentation.statistic.component.CategoryStatistic
 import com.muriz.pengeluaranku.ui.presentation.statistic.component.DatePickerStatistic
 import com.muriz.pengeluaranku.ui.presentation.statistic.component.PieChartStatistic
+import com.muriz.pengeluaranku.ui.presentation.statistic.data.DataStatistic
 import com.muriz.pengeluaranku.ui.theme.poppinsFontFamily
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -42,7 +49,9 @@ import java.util.Locale
 
 @Composable
 fun StatisticScreen(
-    modifier: Modifier = Modifier, pieChartData: List<PieChartData>
+    modifier: Modifier = Modifier,
+    pieChartData: List<PieChartData>,
+    dataStatistic: List<DataStatistic>
 ) {
 
     val formated = Locale("in", "ID")
@@ -52,29 +61,44 @@ fun StatisticScreen(
     var dateLabel by remember { mutableStateOf("$month ${date.year}") }
     var visible by remember { mutableStateOf(false) }
 
-    Column(
-        Modifier.background(colorResource(R.color.deepBlue)),
-        horizontalAlignment = Alignment.CenterHorizontally
+    LazyColumn(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier
+            .background(color = colorResource(R.color.lightBlue))
+            .fillMaxSize()
     ) {
-        Text(
-            text = "Statistik Pengeluaran Bulan $month",
-            fontFamily = poppinsFontFamily,
-            color = Color.White,
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = modifier.padding(top = 20.dp, bottom = 20.dp)
-        )
-        PieChartStatistic(
-            modifier = modifier.size(300.dp),
-            pieChartData = pieChartData
-        )
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(color = colorResource(id = R.color.lightBlue)),
-            contentAlignment = Alignment.TopCenter
-        ) {
-            Column {
+        item {
+            Box(
+                modifier = modifier
+                    .fillMaxSize()
+                    .background(color = colorResource(R.color.deepBlue)),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "Statistik Pengeluaran Bulan $month",
+                    fontFamily = poppinsFontFamily,
+                    color = Color.White,
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = modifier.padding(top = 20.dp, bottom = 20.dp)
+                )
+            }
+        }
+        item {
+            Box(
+                modifier = modifier
+                    .fillMaxSize()
+                    .background(color = colorResource(R.color.deepBlue)),
+                contentAlignment = Alignment.Center
+            ) {
+                PieChartStatistic(
+                    modifier = modifier.size(300.dp),
+                    pieChartData = pieChartData
+                )
+            }
+        }
+        item {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Spacer(modifier.height(50.dp))
                 OutlinedTextField(
                     value = dateLabel,
@@ -111,8 +135,21 @@ fun StatisticScreen(
                     currentYear = date.year,
                     onDismiss = { visible = false },
                     selected = { monthChange, year ->
-                        dateLabel = "${date.withMonth(monthChange).format(DateTimeFormatter.ofPattern("MMMM", formated))} $year"
+                        dateLabel = "${
+                            date.withMonth(monthChange)
+                                .format(DateTimeFormatter.ofPattern("MMMM", formated))
+                        } $year"
                     }
+                )
+            }
+        }
+        items(dataStatistic) { dataStatistic ->
+            Box(modifier = modifier.padding(top = 10.dp)){
+                CategoryStatistic(
+                    name = dataStatistic.name,
+                    quantity = dataStatistic.quantity,
+                    color = dataStatistic.color,
+                    value = dataStatistic.value
                 )
             }
         }
@@ -135,8 +172,24 @@ private fun StatisticScreenPrev() {
             data = 2.0
         )
     )
+
+    val dataStatistic : List<DataStatistic> = listOf(
+        DataStatistic(
+            name = CategoryOutcome.MAKANAN.names,
+            color = colorResource(CategoryOutcome.MAKANAN.color),
+            quantity = 500000,
+            value = 0.8
+        ),
+        DataStatistic(
+            name = CategoryOutcome.MINUMAN.names,
+            color = colorResource(CategoryOutcome.MINUMAN.color),
+            quantity = 50000,
+            value = 0.2
+        )
+    )
     StatisticScreen(
         modifier = Modifier,
-        pieChartData = pieChartData
+        pieChartData = pieChartData,
+        dataStatistic = dataStatistic
     )
 }
